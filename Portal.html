@@ -1,0 +1,96 @@
+<html>
+<head>
+  <title>PassageWalk: Admin Portal</title>
+  <style>
+  body {
+    background-image: url("church.jpg");
+    background-size: 1400px 800px;
+  }
+
+  h1 {
+    color: rgb(227,120,78);
+    font-family: verdana;
+    font-size: 200%;
+  }
+  h2  {
+    color: black;
+    font-family: courier;
+    font-size: 120%;
+  }
+  .box {
+    /* background-color: rgb(227,120,78) */
+    /* border: 2px solid white ; */
+    padding-left: 35%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+  }
+  </style>
+</head>
+<body>
+  <script src = "https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+  <script src = "https://www.gstatic.com/firebasejs/5.7.0/firebase-firestore.js"></script>
+  <script type="text/javascript">
+  //Initialize Firebase
+  var firebaseConfig = {
+    apiKey: "AIzaSyD-rEIW93zccC4y6F-UgAV4AoYHJbiq3Pw",
+    authDomain: "passagewalk-2.firebaseapp.com",
+    databaseURL: "https://passagewalk-2.firebaseio.com",
+    projectId: "passagewalk-2",
+    storageBucket: "",
+    messagingSenderId: "384791995810",
+    appId: "",
+    measurementId: "",
+  };
+  firebase.initializeApp(firebaseConfig);
+  var firestore = firebase.firestore();
+  const ref = firestore.collection("Test")We
+  function writeData() {
+    var documentName = document.getElementById("book").value
+    ref.doc(documentName).set({
+      Plantype : document.getElementById("Plantype").value,
+      book : document.getElementById("book").value,
+      days : parseInt(document.getElementById("days").value),
+      ident : parseInt(document.getElementById("ident").value),
+      image : document.getElementById("image").value,
+      passagesRead : 0,
+    }).then(function() {
+      alert("Update Saved")
+    }).catch(function(error) {
+      alert("Got an error", error)
+    });
+  }
+  </script>
+  <div class = "box">
+    <h1> <small>Passage Walk</small></h1>
+    <h2><small>Admin Portal</small></h2>
+
+    <select name="plantype" id = "Plantype">
+      <option>Select Plan Type</option>
+      <option>Under 30 Day Plan</option>
+      <option>Under 40 Day Plan</option>
+      <option>Under 60 Day Plan</option>
+    </select>
+    <br />
+    <br />
+    <input type = "text" placeholder="Book" id = "book"/>
+    <br />
+    <br />
+    <input type = "text" placeholder="Days" id = "days"/>
+    <br />
+    <br />
+    <input type = "text" placeholder="Identifaction" id = "ident"/>
+    <br />
+    <br />
+    <input type = "text" placeholder="Image Name" id = "image"/>
+    <br />
+    <br />
+    <button onClick = "writeData()">Submit</button>
+  </div>
+
+
+</body>
+</html>
